@@ -292,7 +292,14 @@ $("#btn-entrance").addEventListener("click", () => {
 $("#btn-pregame").addEventListener("click", async () => {
   playSound();
   showScreen(screenGame);
-  await sortPhotosByDate();
+  try {
+    await Promise.race([
+      sortPhotosByDate(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 8000)),
+    ]);
+  } catch (e) {
+    PHOTOS = [...PHOTOS_RAW];
+  }
   startPhotoGame();
 });
 $("#btn-transition").addEventListener("click", () => {
