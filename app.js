@@ -125,7 +125,7 @@ async function getPhotoDate(photo) {
       } else resolve(0);
     };
     img.onerror = () => resolve(0);
-    img.src = photo.src;
+    img.src = encodeURI(photo.src);
   });
 }
 
@@ -137,18 +137,15 @@ async function sortPhotosByDate() {
   PHOTOS = dated.map(({ _ts, ...p }) => p);
 }
 
-function preloadImages() {
-  return Promise.all(
-    PHOTOS.map(
-      (p) =>
-        new Promise((resolve) => {
-          const img = new Image();
-          img.onload = () => resolve();
-          img.onerror = () => resolve();
-          img.src = p.src;
-        })
-    )
-  );
+async function preloadImages() {
+  for (const p of PHOTOS) {
+    await new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
+      img.src = encodeURI(p.src);
+    });
+  }
 }
 
 // ===== PHOTO MEMORIES GAME =====
@@ -188,8 +185,9 @@ function spawnFallingPhoto() {
   el.dataset.src = photo.src;
 
   const img = document.createElement("img");
-  img.src = photo.src;
   img.alt = photo.caption;
+  img.width = 80;
+  img.height = 80;
   img.loading = "eager";
   img.onerror = () => { el.classList.add("photo-error"); img.src = "images/placeholder.svg"; };
   el.appendChild(img);
@@ -234,6 +232,7 @@ function spawnFallingPhoto() {
   });
 
   fallingZone.appendChild(el);
+  img.src = encodeURI(photo.src);
 }
 
 function addPolaroidToBoard(photo) {
@@ -246,7 +245,7 @@ function addPolaroidToBoard(photo) {
   const imgWrap = document.createElement("div");
   imgWrap.className = "polaroid-img";
   const img = document.createElement("img");
-  img.src = photo.src;
+  img.src = encodeURI(photo.src);
   img.alt = photo.caption;
   img.onerror = () => { img.src = "images/placeholder.svg"; };
   imgWrap.appendChild(img);
@@ -314,7 +313,7 @@ $("#btn-pregame").addEventListener("click", async () => {
   } catch (e) {
     PHOTOS = [...PHOTOS_RAW];
   }
-  await Promise.race([preloadImages(), new Promise((r) => setTimeout(r, 6000))]);
+  await Promise.race([preloadImages(), new Promise((r) => setTimeout(r, 10000))]);
   startPhotoGame();
 });
 $("#btn-transition").addEventListener("click", () => {
