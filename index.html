@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Will you be my Valentine? 💗</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app" class="app">
+    <!-- Floating decorations (ribbons, pins, hearts) -->
+    <div class="floating-decor" aria-hidden="true">
+      <span class="float-ribbon float-1">🎀</span>
+      <span class="float-ribbon float-2">💜</span>
+      <span class="float-ribbon float-3">💗</span>
+      <span class="float-ribbon float-4">👑</span>
+      <span class="float-ribbon float-5">💕</span>
+      <span class="float-ribbon float-6">📌</span>
+    </div>
+
+    <!-- Screen 1: Intro -->
+    <section id="screen-intro" class="screen screen-active">
+      <div class="step-content fade-in">
+        <p class="step-text">For you...</p>
+        <button id="btn-intro" class="btn-pixel btn-next" type="button">tap to continue</button>
+        <button id="btn-download-dev" class="btn-pixel btn-download-dev" type="button">Download collage (dev)</button>
+      </div>
+    </section>
+
+    <!-- Screen 2: Entrance -->
+    <section id="screen-entrance" class="screen">
+      <div class="entrance-content fade-in">
+        <div class="pixel-icon">📌</div>
+        <h1 class="pixel-title">something special...</h1>
+        <p class="subtitle">collect our memories as they fall</p>
+        <button id="btn-entrance" class="btn-pixel btn-next" type="button">tap to continue</button>
+      </div>
+    </section>
+
+    <!-- Screen 3: Pre-game -->
+    <section id="screen-pregame" class="screen">
+      <div class="step-content fade-in">
+        <p class="step-text">Collect our memories</p>
+        <p class="step-hint">tap each photo as it falls to reveal it</p>
+        <button id="btn-pregame" class="btn-pixel btn-next" type="button">let's go</button>
+      </div>
+    </section>
+
+    <!-- Screen 4: Photo memories (full page) -->
+    <section id="screen-game" class="screen screen-game-photos">
+      <div class="game-header game-header-photos">
+        <p class="game-instruction">tap the falling photos</p>
+        <span id="photo-count" class="photo-count">0 / 0</span>
+        <button id="btn-sound" class="btn-icon" type="button" aria-label="Toggle sound">🔊</button>
+      </div>
+      <div id="falling-zone" class="falling-zone-photos"></div>
+      <div id="memory-board" class="memory-board"></div>
+      <div id="game-complete" class="game-complete hidden">
+        <button id="btn-see-reveal" class="btn-pixel btn-next" type="button">see what's next</button>
+      </div>
+      <div id="collage-actions" class="collage-actions hidden">
+        <button id="btn-download-collage" class="btn-pixel btn-download" type="button">Download as Instagram Story</button>
+      </div>
+    </section>
+
+    <!-- Screen 5: Transition -->
+    <section id="screen-transition" class="screen">
+      <div class="step-content fade-in">
+        <div class="pixel-icon">✨</div>
+        <p class="step-text">You did it!</p>
+        <button id="btn-transition" class="btn-pixel btn-next" type="button">see what's next</button>
+      </div>
+    </section>
+
+    <!-- Screen 6: Final reveal -->
+    <section id="screen-reveal" class="screen">
+      <div id="confetti-container" class="confetti-container"></div>
+      <div class="reveal-content">
+        <div class="reveal-icon">💗</div>
+        <h2 id="reveal-title" class="reveal-title">Will you be my Valentine?</h2>
+        <div id="personal-message" class="personal-message"></div>
+        <div id="reveal-buttons" class="reveal-buttons">
+          <button id="btn-yes" class="btn-yes btn-yes-primary" type="button">Yes! :)</button>
+          <button id="btn-no" class="btn-yes btn-yes-no" type="button">No!?</button>
+        </div>
+        <div id="reveal-after-yes" class="reveal-after-yes hidden">
+          <button id="btn-back-to-collage" class="btn-pixel btn-next" type="button">Back to our memories</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

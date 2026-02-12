@@ -1,0 +1,521 @@
+/* ============================================
+   PIXEL RIBBON VALENTINE - Styles
+   Pastel + punk-cute aesthetic
+   ============================================ */
+
+/* ----- Custom Properties (override in :root for quick theme tweaks) ----- */
+:root {
+  --pink: #f4b8c4;
+  --pink-deep: #e8a4b5;
+  --lavender: #d4c4f0;
+  --lavender-deep: #c4b0e8;
+  --mint: #b8e8d4;
+  --mint-deep: #a4e0c4;
+  --cream: #faf6f0;
+  --cream-dark: #f0ebe3;
+  --coral: #f0c4b8;
+  --shadow-soft: rgba(180, 140, 160, 0.2);
+  --shadow-pixel: rgba(80, 60, 80, 0.15);
+  /* High-contrast text (readable on pastel background) */
+  --text-primary: #6b4a52;
+  --text-secondary: #5a4a6b;
+  --text-accent: #8b5a6b;
+}
+
+/* ----- Reset & Base ----- */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(160deg, var(--cream) 0%, var(--lavender) 30%, var(--pink) 70%, var(--cream-dark) 100%);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* ----- App Shell ----- */
+.app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ----- Floating Decorations ----- */
+.floating-decor {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.float-ribbon {
+  position: absolute;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  opacity: 0.4;
+  animation: float 8s ease-in-out infinite;
+}
+.float-1 { top: 10%; left: 8%; animation-delay: 0s; }
+.float-2 { top: 15%; right: 12%; animation-delay: 1.2s; }
+.float-3 { bottom: 25%; left: 5%; animation-delay: 2.4s; }
+.float-4 { bottom: 20%; right: 8%; animation-delay: 3.6s; }
+.float-5 { top: 45%; left: 3%; animation-delay: 4.8s; }
+.float-6 { top: 50%; right: 5%; animation-delay: 6s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(5deg); }
+}
+
+/* ----- Screen Layout ----- */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  z-index: 1;
+}
+.screen-active {
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+}
+
+/* ----- Screen 1: Entrance ----- */
+.entrance-content {
+  text-align: center;
+  max-width: 360px;
+}
+/* ----- Shared step screens (intro, pregame, transition) ----- */
+.step-content {
+  text-align: center;
+  max-width: 360px;
+}
+.step-text {
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem;
+}
+.step-hint {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0 0 1.5rem;
+}
+.btn-next { margin-top: 0.5rem; }
+.btn-download-dev {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  opacity: 0.7;
+}
+
+.pixel-icon {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+.pixel-title {
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
+  letter-spacing: 0.05em;
+}
+.subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0.75rem 0 1rem;
+}
+.btn-pixel {
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border: 2px solid var(--text-accent);
+  border-radius: 8px;
+  background: var(--cream);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.btn-pixel:hover { transform: scale(1.05); box-shadow: 0 4px 12px var(--shadow-soft); }
+.btn-pixel:active { transform: scale(0.98); }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fade-in 0.6s ease forwards; }
+
+/* ----- Screen 2: Game (photo memories) ----- */
+.screen-game-photos {
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+}
+.game-header-photos {
+  flex-shrink: 0;
+  padding: 1rem 1.5rem 0.5rem;
+  margin-bottom: 0;
+}
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.photo-count {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.game-instruction {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+.btn-icon {
+  font-size: 1.25rem;
+  padding: 0.4rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+.btn-icon:hover { opacity: 1; }
+
+/* Falling zone - full width, fixed height, photos fall through */
+.falling-zone-photos {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  min-height: 280px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Falling photo thumbnail - gentle fall, larger with trail */
+.falling-photo {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  left: 0;
+  top: -100px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  border-radius: 10px;
+  overflow: visible;
+  box-shadow: 0 4px 12px var(--shadow-soft);
+  animation: photo-fall 6s ease-in-out forwards;
+  transition: transform 0.15s ease;
+  z-index: 10;
+  border: 3px solid white;
+}
+/* Pixelated silver glowing trail - above the photo as it falls */
+.falling-photo::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 100px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(255, 255, 255, 0.08) 3px,
+      rgba(255, 255, 255, 0.08) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 3px,
+      rgba(255, 255, 255, 0.06) 3px,
+      rgba(255, 255, 255, 0.06) 4px
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(192, 192, 192, 0.2) 25%,
+      rgba(210, 210, 220, 0.45) 60%,
+      rgba(230, 230, 240, 0.7) 100%
+    );
+  filter: drop-shadow(0 0 10px rgba(192, 192, 192, 0.7))
+          drop-shadow(0 0 20px rgba(200, 200, 210, 0.4));
+  pointer-events: none;
+}
+.falling-photo:hover { transform: scale(1.1); }
+.falling-photo.revealed {
+  animation: none;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(1.3);
+  transition: all 0.3s ease;
+}
+.falling-photo.revealed::before {
+  display: none;
+}
+.falling-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 7px;
+}
+.falling-photo.photo-error {
+  background: var(--lavender);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+@keyframes photo-fall {
+  from { transform: translateY(0) rotate(0deg); opacity: 1; }
+  to { transform: translateY(60vh) rotate(8deg); opacity: 1; }
+}
+
+/* Memory board - scrollable, fills with polaroids */
+.memory-board {
+  flex: 1;
+  min-height: 50vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.25rem;
+  align-content: start;
+}
+
+/* Polaroid style - matches download: 12/12/36 padding, rounded corners */
+.polaroid {
+  background: white;
+  padding: 12px 12px 36px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px var(--shadow-soft), 0 1px 3px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+  animation: polaroid-pop 0.5s ease forwards;
+  transform: rotate(var(--polaroid-rotation, 0deg));
+}
+.polaroid:hover { transform: scale(1.03) rotate(var(--polaroid-rotation, 0deg)); }
+.polaroid-img {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--cream);
+}
+.polaroid-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.polaroid-caption {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 1.3;
+  font-family: 'Nunito', cursive, sans-serif;
+}
+
+@keyframes polaroid-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6) rotate(var(--polaroid-rotation, 0deg));
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(var(--polaroid-rotation, 0deg));
+  }
+}
+
+/* Game complete overlay */
+.game-complete {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  animation: fade-in 0.5s ease forwards;
+}
+.game-complete.hidden {
+  display: none;
+}
+
+/* Collage view - hide game UI, show memory board + download */
+.screen-game-photos.collage-view .game-header-photos,
+.screen-game-photos.collage-view .falling-zone-photos,
+.screen-game-photos.collage-view .game-complete {
+  display: none !important;
+}
+.screen-game-photos.collage-view {
+  flex-direction: column;
+  padding: 0;
+}
+.screen-game-photos.collage-view .memory-board {
+  flex: 1;
+  min-height: 0;
+}
+.collage-actions {
+  flex-shrink: 0;
+  padding: 1.5rem;
+  text-align: center;
+}
+.collage-actions.hidden {
+  display: none !important;
+}
+.btn-download {
+  width: 100%;
+  max-width: 320px;
+}
+
+/* ----- Screen 3: Reveal ----- */
+.reveal-content {
+  text-align: center;
+  max-width: 380px;
+  animation: reveal-pop 0.6s ease forwards;
+}
+@keyframes reveal-pop {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.reveal-icon {
+  font-size: 4.5rem;
+  margin-bottom: 0.5rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+.reveal-title {
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 1rem;
+}
+.personal-message {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  white-space: pre-line;
+}
+.reveal-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.reveal-after-yes {
+  margin-top: 1rem;
+}
+.reveal-after-yes.hidden,
+.reveal-buttons.hidden {
+  display: none !important;
+}
+.btn-yes-no {
+  background: var(--cream);
+  color: var(--text-secondary);
+  border: 2px solid var(--lavender);
+}
+
+.btn-yes {
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.9rem 2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.btn-yes-primary {
+  background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%);
+  color: white;
+  box-shadow: 0 4px 12px var(--shadow-soft);
+}
+.btn-yes-secondary {
+  background: var(--cream);
+  color: var(--text-primary);
+  border: 2px solid var(--text-accent);
+}
+.btn-yes {
+  transition: transform 0.1s ease;
+}
+.btn-yes:hover { transform: scale(1.04); }
+.btn-yes:active { transform: scale(0.98); }
+.btn-yes.shake {
+  animation: btn-shake 0.4s ease;
+}
+@keyframes btn-shake {
+  0%, 100% { transform: scale(var(--yes-scale, 1)) translateX(0); }
+  20% { transform: scale(var(--yes-scale, 1)) translateX(-8px); }
+  40% { transform: scale(var(--yes-scale, 1)) translateX(8px); }
+  60% { transform: scale(var(--yes-scale, 1)) translateX(-5px); }
+  80% { transform: scale(var(--yes-scale, 1)) translateX(5px); }
+}
+
+/* Confetti container */
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  animation: confetti-fall 3s ease-out forwards;
+}
+@keyframes confetti-fall {
+  from {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(100vh) rotate(720deg);
+  }
+}
+
+/* ----- Responsive tweaks ----- */
+@media (max-width: 480px) {
+  .memory-board {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+  .falling-photo { width: 68px; height: 68px; }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .falling-zone-photos { height: 35vh; min-height: 200px; }
+}
