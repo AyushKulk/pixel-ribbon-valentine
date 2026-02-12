@@ -69,6 +69,7 @@ const btnDownloadCollage = $("#btn-download-collage");
 const collageActions = $("#collage-actions");
 const fallingZone = $("#falling-zone");
 const memoryBoard = $("#memory-board");
+const gameScroll = $("#game-scroll");
 const photoCountEl = $("#photo-count");
 const gameCompleteEl = $("#game-complete");
 const personalMessage = $("#personal-message");
@@ -149,7 +150,7 @@ function startPhotoGame() {
   photoQueue = [...PHOTOS];
   // No shuffle - photos are shown in date order (oldest first)
   photoCountEl.textContent = `0 / ${photoQueue.length}`;
-  fallingZone.innerHTML = "";
+  fallingZone.querySelectorAll(".falling-photo").forEach((el) => el.remove());
   memoryBoard.innerHTML = "";
   gameCompleteEl.classList.add("hidden");
 
@@ -384,8 +385,8 @@ async function downloadCollageAsPng(sources) {
   const MIFFY_TOP_RIGHT_SIZE = 200;
   const MIFFY_BOTTOM_SIZE = 240;
   const MIFFY_MARGIN = 20;
-  const DECORATION_MIN_SIZE = 100;
-  const DECORATION_MAX_SIZE = 130;
+  const DECORATION_MIN_SIZE = 150;
+  const DECORATION_MAX_SIZE = 190;
   const DECORATION_PADDING = 45;
   const DECORATION_CLUSTER_WIDTH = 640;
 
