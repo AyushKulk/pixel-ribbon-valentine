@@ -137,6 +137,20 @@ async function sortPhotosByDate() {
   PHOTOS = dated.map(({ _ts, ...p }) => p);
 }
 
+function preloadImages() {
+  return Promise.all(
+    PHOTOS.map(
+      (p) =>
+        new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve();
+          img.onerror = () => resolve();
+          img.src = p.src;
+        })
+    )
+  );
+}
+
 // ===== PHOTO MEMORIES GAME =====
 let spawnInterval = null;
 
@@ -176,7 +190,7 @@ function spawnFallingPhoto() {
   const img = document.createElement("img");
   img.src = photo.src;
   img.alt = photo.caption;
-  img.loading = "lazy";
+  img.loading = "eager";
   img.onerror = () => { el.classList.add("photo-error"); img.src = "images/placeholder.svg"; };
   el.appendChild(img);
 
@@ -300,6 +314,7 @@ $("#btn-pregame").addEventListener("click", async () => {
   } catch (e) {
     PHOTOS = [...PHOTOS_RAW];
   }
+  await Promise.race([preloadImages(), new Promise((r) => setTimeout(r, 6000))]);
   startPhotoGame();
 });
 $("#btn-transition").addEventListener("click", () => {
