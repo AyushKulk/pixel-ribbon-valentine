@@ -115,12 +115,6 @@ body {
   margin: 0 0 1.5rem;
 }
 .btn-next { margin-top: 0.5rem; }
-.btn-download-dev {
-  margin-top: 1rem;
-  font-size: 0.85rem;
-  padding: 0.5rem 1rem;
-  opacity: 0.7;
-}
 
 .pixel-icon {
   font-size: 4rem;
@@ -238,7 +232,7 @@ body {
   border-radius: 10px;
   overflow: visible;
   box-shadow: 0 4px 12px var(--shadow-soft);
-  animation: photo-fall 28s linear forwards;
+  animation: photo-fall 25s linear forwards;
   transition: transform 0.15s ease;
   z-index: 10;
   border: 3px solid white;
