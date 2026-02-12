@@ -5,7 +5,7 @@
 // ===== CUSTOMIZE HERE =====
 const CONFIG = {
   name: "",
-  message: "You make every day feel special. 💗",
+  message: "You make even the most mundane, boring, silent days feel special. 💗",
   dateLocation: "February 14th",
   colors: {
     pink: "#f4b8c4",
@@ -38,7 +38,7 @@ const PHOTOS_RAW = [
   { src: "images/summer_1.jpeg", caption: "our first summer" },
   { src: "images/weeknd.JPG", caption: "best concert ever" },
   { src: "images/xmas.jpeg", caption: "christmas (only at our place from now)" },
-  { src: "images/zoo.jpeg", caption: "i can't wait to show you elephants halfway across the world },
+  { src: "images/zoo.jpeg", caption: "i can't wait to show you elephants halfway across the world" },
 ];
 let PHOTOS = [...PHOTOS_RAW]; // Sorted by date after load
 
